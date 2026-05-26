@@ -1,7 +1,6 @@
 # Mateo Lopez — BIM Developer Portfolio
 
-> **[🌐 View Live Portfolio →](https://yourusername.github.io/portfolio/)**  
-> *(Replace `yourusername` with your GitHub username)*
+**[🌐 View Live Portfolio →](https://Matbimdev.github.io/portfolio/)**
 
 ---
 
