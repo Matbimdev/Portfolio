@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mateo Lopez — BIM Developer Portfolio</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --bg2: #1e293b;
+    --bg3: #334155;
+    --accent: #38bdf8;
+    --accent2: #818cf8;
+    --accent3: #34d399;
+    --accent4: #fb923c;
+    --text: #f1f5f9;
+    --text2: #94a3b8;
+    --border: #334155;
+    --card: #1e293b;
+    --green: #34d399;
+    --yellow: #fbbf24;
+    --red: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .page { max-width: 1100px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 60%, #1a1035 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 48px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);
+  }
+  .hero-title { font-size: 32px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+  .hero-role { font-size: 16px; color: var(--accent); font-weight: 600; margin: 4px 0 16px; }
+  .hero-pitch {
+    background: rgba(56,189,248,0.08);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    color: var(--text);
+    font-size: 14px;
+    max-width: 780px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .hero-pitch strong { color: var(--accent); }
+  .social-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px; font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { text-decoration: none; }
+  .social-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .social-btn.li:hover { background: rgba(56,189,248,0.15); border-color: var(--accent); color: var(--accent); }
+  .social-btn.yt:hover { background: rgba(248,113,113,0.15); border-color: var(--red); color: var(--red); }
+
+  /* ── Intro video ── */
+  .intro-video-wrap {
+    margin-bottom: 32px;
+  }
+  .intro-video-inner {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 24px;
+  }
+  .intro-yt-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(255,0,0,0.12); border: 1px solid rgba(255,80,80,0.4);
+    border-radius: 10px; padding: 14px 28px;
+    font-size: 15px; font-weight: 700; color: #ff6b6b;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .intro-yt-btn:hover { background: rgba(255,0,0,0.22); text-decoration: none; color: #ff6b6b; }
+  .intro-yt-btn svg { width: 28px; height: 28px; flex-shrink: 0; }
+  .intro-yt-btn .btn-sub { display: block; font-size: 11px; font-weight: 400; color: var(--text2); margin-top: 2px; }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text2);
+    margin: 36px 0 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── Skills grid ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin-bottom: 8px;
+  }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .skill-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .skill-bar { height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+  .skill-fill { height: 100%; border-radius: 2px; }
+  .skill-label { font-size: 11px; color: var(--text2); margin-top: 4px; }
+  .lvl-expert      { background: var(--green); }
+  .lvl-advanced    { background: var(--accent); }
+  .lvl-intermediate{ background: var(--accent2); }
+  .lvl-learning    { background: var(--yellow); }
+
+  /* ── Project cards ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 24px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; gap: 12px; }
+  .card-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .card-tagline { font-size: 12px; color: var(--accent); font-style: italic; margin-bottom: 12px; line-height: 1.5; }
+  .tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+  }
+  .tag-py  { background: #1d4ed8; color: #bfdbfe; }
+  .tag-cs  { background: #6d28d9; color: #ddd6fe; }
+  .tag-dyn { background: #065f46; color: #a7f3d0; }
+  .tag-gh  { background: #7c2d12; color: #fed7aa; }
+  .tag-rev { background: #1e3a5f; color: #bae6fd; }
+
+  /* ── Card image ── */
+  .card-image {
+    width: 100%; border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .img-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--text2);
+    margin-bottom: 6px;
+  }
+
+  /* ── Card content ── */
+  .card-bullets { padding-left: 16px; margin-bottom: 10px; }
+  .card-bullets li { font-size: 13px; color: var(--text2); margin-bottom: 5px; line-height: 1.55; }
+  .card-bullets li:last-child { margin-bottom: 0; }
+  .card-bullets strong { color: var(--text); }
+  .card-bullets code {
+    font-family: 'Courier New', monospace; font-size: 11px;
+    background: var(--bg3); padding: 1px 4px; border-radius: 3px; color: var(--accent3);
+  }
+  .card-result {
+    background: rgba(52,211,153,0.07); border-left: 2px solid var(--accent3);
+    border-radius: 0 6px 6px 0; padding: 8px 12px;
+    font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 10px;
+  }
+  .card-result strong { color: var(--accent3); }
+
+  .api-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+  .api-pill {
+    font-size: 10px; background: var(--bg3); color: var(--text2);
+    padding: 2px 8px; border-radius: 20px; font-family: 'Courier New', monospace;
+  }
+
+  /* ── Video embed ── */
+  .video-wrap {
+    position: relative; padding-bottom: 56.25%;
+    height: 0; overflow: hidden; border-radius: 8px;
+    margin-bottom: 12px; background: var(--bg3);
+  }
+  .video-wrap iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: 0; border-radius: 8px;
+  }
+  .video-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: #f87171;
+    margin-bottom: 6px; display: flex; align-items: center; gap: 5px;
+  }
+  .video-label::before { content: '▶'; font-size: 9px; }
+
+  /* ── YouTube link button (fallback) ── */
+  .yt-link-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.3);
+    border-radius: 8px; padding: 10px 16px; margin-bottom: 12px;
+    font-size: 13px; font-weight: 600; color: #f87171;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .yt-link-btn:hover { background: rgba(248,113,113,0.2); text-decoration: none; color: #f87171; }
+  .yt-link-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* ── Tables ── */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th {
+    background: var(--bg3); color: var(--text2);
+    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 8px 12px; text-align: left; font-weight: 700;
+  }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .complexity-high { color: var(--red); font-weight: 700; }
+  .complexity-med  { color: var(--yellow); font-weight: 700; }
+  .complexity-low  { color: var(--green); font-weight: 700; }
+
+  /* ── Work Experience ── */
+  .exp-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px 28px; margin-bottom: 28px;
+  }
+  .exp-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+  }
+  .exp-title { font-size: 17px; font-weight: 700; color: #fff; }
+  .exp-company { font-size: 12px; color: var(--text2); margin-top: 3px; }
+  .exp-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;
+  }
+  .exp-tech {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px;
+  }
+  .exp-tech-name {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .exp-tech ul { padding-left: 16px; }
+  .exp-tech ul li { font-size: 12px; color: var(--text2); margin-bottom: 6px; line-height: 1.55; }
+  .exp-tech ul li:last-child { margin-bottom: 0; }
+
+  .flag { font-size: 13px; }
+  .country-tag {
+    font-size: 10px; background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border); color: var(--text2);
+    padding: 2px 8px; border-radius: 20px; margin-left: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 28px 22px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .exp-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══════════ HERO ══════════ -->
+  <div class="hero">
+    <div class="hero-title">Mateo Lopez</div>
+    <div class="hero-role">BIM Developer · 3D Developer</div>
+    <div class="hero-pitch">
+      Civil Engineer with <strong>4+ years of BIM automation</strong>. I build Revit API tools in
+      <strong>Python and C#</strong> that translate engineering rules into automated 3D geometry —
+      pipe networks from CAD drawings, structural framing from walls, ceiling geometry from solid
+      Boolean operations. <strong>25+ production PyRevit tools</strong> on live US projects,
+      a full <strong>C# add-in</strong> targeting Revit 2022–2026, and <strong>50+ Dynamo scripts</strong>
+      spanning MEP, architecture, and QC. <strong>B2 English</strong> (TOEFL ITP 570).
+      Currently pursuing a <strong>Master's in BIM Management</strong> at EADIC.
+    </div>
+    <div class="social-links">
+      <a class="social-btn li" href="https://www.linkedin.com/in/mateo-lopez/" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a class="social-btn yt" href="https://www.youtube.com/@AUBIMAT" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        AUBIMAT
+      </a>
+    </div>
+  </div>
+
+  <!-- ══════════ INTRO VIDEO ══════════ -->
+  <div class="intro-video-wrap">
+    <div class="intro-video-inner">
+      <a class="intro-yt-btn" href="https://www.youtube.com/watch?v=kr-TPxuv0xc" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        <span>
+          Watch Intro — BIM Automation Reel
+          <span class="btn-sub">~1 min · AUBIMAT · YouTube</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ══════════ SKILLS ══════════ -->
+  <div class="section-title">Skills</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-name">Revit API (Python)</div>
+      <div class="skill-bar"><div class="skill-fill lvl-expert" style="width:95%"></div></div>
+      <div class="skill-label">Expert — 25+ production tools</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Revit API (C#)</div>
+      <div class="skill-bar"><div class="skill-fill lvl-advanced" style="width:78%"></div></div>
+      <div class="skill-label">Advanced — Full add-in R22–R26</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Dynamo</div>
+      <div class="skill-bar"><div class="skill-fill lvl-expert" style="width:88%"></div></div>
+      <div class="skill-label">Expert — 50+ scripts</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Grasshopper / Rhino Inside Revit</div>
+      <div class="skill-bar"><div class="skill-fill lvl-advanced" style="width:72%"></div></div>
+      <div class="skill-label">Advanced — Client projects across 3 countries</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">3D Geometry &amp; Boolean Ops</div>
+      <div class="skill-bar"><div class="skill-fill lvl-expert" style="width:90%"></div></div>
+      <div class="skill-label">Expert — Solid, Face, Boolean, Curves</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">MEP Systems (Revit API)</div>
+      <div class="skill-bar"><div class="skill-fill lvl-expert" style="width:88%"></div></div>
+      <div class="skill-label">Expert — Pipes, fittings, connectors</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">WPF / XAML UI</div>
+      <div class="skill-bar"><div class="skill-fill lvl-advanced" style="width:72%"></div></div>
+      <div class="skill-label">Advanced — Custom dialogs, data binding</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">CAD Interoperability</div>
+      <div class="skill-bar"><div class="skill-fill lvl-expert" style="width:87%"></div></div>
+      <div class="skill-label">Expert — CAD→BIM pipelines, IFC, linked models</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Civil 3D API</div>
+      <div class="skill-bar"><div class="skill-fill lvl-learning" style="width:15%"></div></div>
+      <div class="skill-label">Learning — fast ramp from Revit API base</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">English</div>
+      <div class="skill-bar"><div class="skill-fill lvl-advanced" style="width:75%"></div></div>
+      <div class="skill-label">B2 — TOEFL ITP 570</div>
+    </div>
+  </div>
+
+  <!-- ══════════ WORK EXPERIENCE ══════════ -->
+  <div class="section-title">Work Experience</div>
+  <div class="exp-card">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">BIM Developer <span class="flag">🇺🇸</span></div>
+        <div class="exp-company">USA · Industrial Facility</div>
+      </div>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-tech">
+        <div class="exp-tech-name" style="color:var(--accent)">⚙ PyRevit</div>
+        <ul>
+          <li>25+ automation tools in production across MEP, Architecture, QC, and Views</li>
+          <li>Deployed on live US projects; reduce manual workflows by 40–60% per task</li>
+        </ul>
+      </div>
+      <div class="exp-tech">
+        <div class="exp-tech-name" style="color:var(--accent2)">◈ C# / .NET</div>
+        <ul>
+          <li>Enterprise Revit add-in with ribbon UI, WPF dialogs, and multi-version support (Revit 2022–2026)</li>
+          <li>Boolean geometry pipeline, face projection, JSON persistence, worksharing-aware operations</li>
+        </ul>
+      </div>
+      <div class="exp-tech">
+        <div class="exp-tech-name" style="color:var(--accent3)">⬡ Dynamo</div>
+        <ul>
+          <li>50+ scripts spanning MEP, structural, architecture, and data pipelines</li>
+          <li>CAD-to-pipe automation that evolved into the production FP Pipes tool</li>
+        </ul>
+      </div>
+      <div class="exp-tech">
+        <div class="exp-tech-name" style="color:var(--accent4)">◇ Grasshopper / RIR</div>
+        <ul>
+          <li>Completed LearnGrasshopper's Grasshopper-in-Revit course; applied to parametric formwork and client projects</li>
+          <li>Bidirectional Rhino↔Revit workflows, IFC property set mapping, parametric family automation</li>
+        </ul>
+      </div>
+      <div class="exp-tech">
+        <div class="exp-tech-name" style="color:#e879f9">⚡ Power Automation</div>
+        <ul>
+          <li>MS Teams Adaptive Card webhook with RFI tracking, image hosting, and status reply threading</li>
+          <li>Discord bot integration for real-time project notifications triggered directly from Revit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PARAMETRIC 3D GEOMETRY ══════════ -->
+  <div class="section-title">Parametric 3D Geometry</div>
+  <div class="projects-grid">
+
+    <!-- FP Pipes -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">FP Pipes — CAD to Connected Pipe Network</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Full pipeline: AutoCAD layers → Revit pipes with automatic elbows, tees, crosses, and tap fittings at every junction."</div>
+      <div class="img-label">Config UI</div>
+      <img class="card-image" src="Images/fp-pipes.png" alt="FP Pipes configuration dialog">
+      <ul class="card-bullets">
+        <li>Reads AutoCAD linework and groups curves by layer name to identify pipe runs per discipline</li>
+        <li>Detects junction type by pipe count at each intersection point — elbow, tee, cross, or tap fitting placed automatically</li>
+        <li>Multi-pass split logic with connector re-fetch on each pass to handle stale references after model regeneration</li>
+      </ul>
+      <div class="card-result"><strong>20–100 pipes + fittings in under 2 min.</strong> Replaced 8–12 hrs of manual work per floor.</div>
+    </div>
+
+    <!-- Ceiling/Floor from Wall -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Ceiling &amp; Floor from Wall (Python + C#)</div>
+        <div style="display:flex;gap:4px"><div class="tag tag-py">Python</div><div class="tag tag-cs">C#</div></div>
+      </div>
+      <div class="card-tagline">"Automated ceiling/floor generation using 3D solid Boolean operations — no manual sketching needed."</div>
+      <a class="yt-link-btn" href="https://www.youtube.com/watch?v=BysKDpL1xL8" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Watch on YouTube — Automatic Ceiling Creation
+      </a>
+      <ul class="card-bullets">
+        <li>Extracts solid geometry from walls and structural columns at fine detail level; identifies top and bottom faces by normal direction</li>
+        <li>Projects all boundary curves to the target elevation, extrudes, then runs Boolean union and difference operations to compute the final room boundary solid</li>
+        <li>Creates ceiling/floor elements and locks edges to wall faces so they update automatically when walls move</li>
+      </ul>
+      <div class="card-result"><strong>Full floor of ceilings in one operation.</strong> Locked edges update if the wall moves. Implemented in both Python (PyRevit) and C# (add-in).</div>
+    </div>
+
+    <!-- Wall S2B -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Wall S2B — Scan-to-BIM Configurator</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"3-point wall placer: measure thickness from point cloud, auto-create matching wall type, place with live preview."</div>
+      <div class="img-label">Config UI</div>
+      <img class="card-image" src="Images/wall-s2b.png" alt="Wall S2B configuration dialog">
+      <ul class="card-bullets">
+        <li>Pick start and end point for the wall axis; pick a third point on the point cloud face — perpendicular projection gives the measured real-world thickness</li>
+        <li>Matches thickness against existing wall types; if none found, duplicates and scales the compound structure layers automatically</li>
+        <li>Live preview wall visible during the third-point pick — automatically rolled back on cancel, committed on confirm</li>
+      </ul>
+      <div class="card-result"><strong>4-step process reduced to 3 clicks.</strong> Used on 30k–60k m² industrial buildings in the USA. <span class="flag">🇺🇸</span></div>
+    </div>
+
+    <!-- AUBIMAT C# Add-in -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">AUBIMAT C# Revit Add-in</div>
+        <div class="tag tag-cs">C#</div>
+      </div>
+      <div class="card-tagline">"Production add-in: 11 commands, advanced geometry, worksharing, WPF dialogs, Revit 2022–2026."</div>
+      <ul class="card-bullets">
+        <li>Full ribbon with tabs, panels, pulldown buttons, icons, and tooltips — deployable via manifest without installer</li>
+        <li>Shared geometry utilities for solid extraction, face projection, Boolean operations, and curve loop construction; worksharing-aware with editability checks before modifying elements</li>
+        <li>WPF dialogs with unit-aware inputs, JSON settings persistence, and multi-version conditional compilation targeting Revit 2022 through 2026</li>
+      </ul>
+      <div class="card-result"><strong>~4000 LOC, 40+ files, .NET 4.8 + .NET 8.0 multi-target.</strong></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ CONFIGURATOR TOOLS ══════════ -->
+  <div class="section-title">Configurator-Style Tools</div>
+  <div class="projects-grid">
+
+    <!-- Socket Place -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Socket Place — Obstacle-Aware Auto Placement</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Rule-based socket placer: room type defines height rules, 80+ obstacle checks per room, zero clashes on first run."</div>
+      <div class="img-label">Room Rules UI</div>
+      <img class="card-image" src="Images/socket-place.png" alt="Socket Place room type configuration">
+      <ul class="card-bullets">
+        <li>Room type drives height rules — kitchen 1200mm, living 300mm, bathroom 1100mm — boundary projected onto the actual wall inner face geometry</li>
+        <li>Door and window swing arcs define exclusion zones; 3D furniture bounding boxes define clearance volumes — sockets skip any conflicting position</li>
+        <li>Each candidate position validated against the room boundary before placement</li>
+      </ul>
+      <div class="card-result"><strong>43 sockets placed, 30 skipped, 3-level model — full floor in one run.</strong> Freelance delivery. <span class="flag">🇩🇪</span><span class="country-tag">Germany</span></div>
+    </div>
+
+    <!-- FacadeKit -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">FacadeKit — Panel &amp; Gutter Auto-Placement</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Façade configurator: catalog sizes (600→150mm), 2D zone decomposition, gutter splits at openings."</div>
+      <ul class="card-bullets">
+        <li>Reads exterior wall face geometry and decomposes the facade zone into panel segments using bin-packing from catalog sizes with even gap distribution</li>
+        <li>Detects door and window openings automatically; places gutters above each opening and splits long runs at 3000mm maximum with recursive segment partitioning</li>
+        <li>Handles any wall orientation using wall-local coordinate transforms for accurate placement</li>
+      </ul>
+      <div class="card-result"><strong>Full facade paneled from 0 — previously done manually panel by panel.</strong> Freelance delivery. <span class="flag">🇳🇱</span><span class="country-tag">Netherlands</span></div>
+    </div>
+
+    <!-- Cross System Tap -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Cross System Tap — MEP System Bridge</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Solved an undocumented Revit API limitation: connect pipes from different MEP systems without system reassignment."</div>
+      <ul class="card-bullets">
+        <li>Connecting pipes from different MEP systems causes Revit to silently merge one system into the other — no documented solution exists in the official API references</li>
+        <li>Developed a multi-step workaround using temporary geometry to bridge the system boundary while preserving each pipe's original system assignment</li>
+        <li>Reliable across all MEP system type combinations — discovered through systematic debugging and iterative testing</li>
+      </ul>
+      <div class="card-result"><strong>100% reliable cross-system tap.</strong> Pattern not documented in official API references — discovered through systematic debugging. ★ 9.7/10 client rating.</div>
+    </div>
+
+    <!-- Str Column Sections -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Str Column Sections — Auto Section Generator</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Generates X and Y section views for every structural column — with dimensions, tags, and spot elevations, all in one run."</div>
+      <div class="img-label">Output</div>
+      <img class="card-image" src="Images/str-columns.png" alt="Auto-generated structural column section views">
+      <ul class="card-bullets">
+        <li>Collects structural columns in the active floor plan and creates paired X and Y section views per column at user-configured scale with configurable tag types and automatic level detection</li>
+        <li>Smart dimensioning: column height referenced from detail geometry; column widths compared across the top-2 tallest columns with ±40mm tolerance to align dimensions consistently</li>
+        <li>Auto-tags structural columns, beams, and floors; adds spot elevations for floors that don't sit exactly at a Revit level</li>
+      </ul>
+      <div class="card-result"><strong>Full structural documentation set in one run</strong> — all selected levels, all columns, paired sections with dimensions and annotations.</div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ DYNAMO PORTFOLIO ══════════ -->
+  <div class="section-title">Dynamo Portfolio — 50+ Scripts</div>
+  <div class="projects-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">MEP Automation — Pipes, Conduits &amp; Sprinklers from CAD</div>
+        <div class="tag tag-dyn">Dynamo</div>
+      </div>
+      <div class="card-tagline">"CAD layer → Revit MEP element pipeline across fire protection, plumbing, and electrical disciplines."</div>
+      <a class="yt-link-btn" href="https://www.youtube.com/watch?v=cFczW27gGaQ" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Watch Demo — MEP Automation from CAD
+      </a>
+      <ul class="card-bullets">
+        <li>Layer-selective CAD geometry extraction using Bimorph nodes — only the target discipline's linework is processed</li>
+        <li>Pipes with full system and type assignment; conduits with junction boxes; sprinklers from CAD point symbols with branch pipe connection logic</li>
+        <li>Tee and takeoff fitting creation for sprinkler networks — same pipeline pattern replicated across 3 MEP disciplines</li>
+      </ul>
+      <div class="card-result">Used daily on US projects. CAD drawing → fully modeled Revit MEP system in minutes. <span class="flag">🇺🇸</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Parametric Section Generator</div>
+        <div class="tag tag-dyn">Dynamo</div>
+      </div>
+      <div class="card-tagline">"Auto-generates structural column section views at user-defined scale, with smart column type detection and tag placement."</div>
+      <ul class="card-bullets">
+        <li>Scale-parameterized section creation (default 1:25, configurable); column type selector for intermediate vs. top columns</li>
+        <li>Trigonometric rotation logic ensures correct section orientation regardless of column angle in plan</li>
+        <li>44 iterations from v1.0 to v4.7 — progressive refinement toward production quality</li>
+      </ul>
+      <div class="card-result"><strong>Published to production at v4.7.</strong> Creates 1–4 section views with multiple tag types in one run.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Excel ↔ Revit Data Pipeline</div>
+        <div class="tag tag-dyn">Dynamo</div>
+      </div>
+      <div class="card-tagline">"Two-way data flow: extract room/element data to Excel, import worksets or material specs from Excel into Revit."</div>
+      <a class="yt-link-btn" href="https://www.youtube.com/watch?v=miwCcc7vveQ" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Watch Demo — Excel ↔ Revit Data Pipeline
+      </a>
+      <ul class="card-bullets">
+        <li>Export: room and element data collected and written to formatted Excel output</li>
+        <li>Import: Excel data drives workset creation, material parameters, and type naming; v1 and v2 variants with improved type mapping and error handling</li>
+      </ul>
+      <div class="card-result">Eliminates one-by-one Revit UI entry for bulk data population. <span class="flag">🇺🇸</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Topo Heat Map <span class="flag">🇬🇧</span><span class="country-tag">UK</span></div>
+        <div class="tag tag-dyn">Dynamo</div>
+      </div>
+      <div class="card-tagline">"Transforms Revit topographic solid into a color-coded elevation heat map — 8 progressive versions delivered."</div>
+      <div class="img-label">Output</div>
+      <img class="card-image" src="Images/Heatmap.png" alt="Topographic elevation heat map — red/blue gradient">
+      <ul class="card-bullets">
+        <li>Per-face elevation extraction from topographic solid; elevation range mapped to a color gradient algorithm</li>
+        <li>Performance optimization for large terrain solids; configurable reference height and vertical interval</li>
+      </ul>
+      <div class="card-result">8 versions (V01–V08). Professional terrain visualization delivered as freelance project.</div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ GRASSHOPPER / RIR ══════════ -->
+  <div class="section-title">Grasshopper / Rhino Inside Revit</div>
+  <div class="projects-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Grasshopper in Revit — LearnGrasshopper Course</div>
+        <div class="tag tag-gh">Grasshopper</div>
+      </div>
+      <div class="card-tagline">"Completed LearnGrasshopper's official Grasshopper-in-Revit course; applied workflows to production automation and client projects."</div>
+      <ul class="card-bullets">
+        <li>Course modules covered: element selection, creation, parameter management, views/sheets, annotations, and IFC property set mapping via Rhino Inside Revit</li>
+        <li>Applied RIR skills to build a parametric formwork definition that reads structural geometry and generates corresponding Revit components bidirectionally</li>
+        <li>Bidirectional Rhino↔Revit workflows used in real client deliveries — analysis results driving Revit family geometry directly</li>
+      </ul>
+      <div class="card-result">Course knowledge immediately applied to 3 freelance deliveries across Spain, Saudi Arabia, and internal automation work.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Acoustic Smart Panel System <span class="flag">🇪🇸</span><span class="country-tag">Spain</span></div>
+        <div class="tag tag-gh">Grasshopper</div>
+      </div>
+      <div class="card-tagline">"Grasshopper-driven acoustic panel families with performance-linked geometry, IFC export, and version-controlled families."</div>
+      <ul class="card-bullets">
+        <li>Parametric Revit families with acoustic performance parameters driving geometry — multiple panel variants delivered</li>
+        <li>Grasshopper analysis visualization script; IFC export with mapped property sets for acoustic data</li>
+      </ul>
+      <div class="card-result">Complex client project combining Grasshopper analysis + Revit family automation + IFC interoperability.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Solar Shading Analysis <span class="flag">🇸🇦</span><span class="country-tag">Saudi Arabia</span></div>
+        <div class="tag tag-gh">Grasshopper</div>
+      </div>
+      <div class="card-tagline">"Time-based solar radiation maps on facades with parametric Louver families optimized from analysis results."</div>
+      <ul class="card-bullets">
+        <li>Solar angle computation and radiation mapping per facade face across different times of day</li>
+        <li>Parametric Louver families driven directly by shading analysis output — design-to-fabrication workflow</li>
+      </ul>
+      <div class="card-result">Analysis output drives parametric family geometry directly — same pattern applicable to any performance-driven design.</div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ INTEROPERABILITY ══════════ -->
+  <div class="section-title">Interoperability — AutoCAD &amp; BIM Platforms</div>
+  <div class="projects-grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">AutoCAD → Revit MEP (Pipes, Conduits, Sprinklers)</div>
+        <div style="display:flex;gap:4px"><div class="tag tag-py">Python</div><div class="tag tag-dyn">Dynamo</div></div>
+      </div>
+      <div class="card-tagline">"AutoCAD linework and symbols are the input — connected Revit MEP elements are the output. Zero manual retracing."</div>
+      <ul class="card-bullets">
+        <li><strong>FP Pipes (Python):</strong> reads AutoCAD linework grouped by layer → creates connected pipe network with auto-fittings at every junction</li>
+        <li><strong>Conduits by CAD (Dynamo):</strong> layer-filtered CAD geometry → conduit runs with junction boxes placed at intersections</li>
+        <li><strong>Sprinklers by CAD (Dynamo):</strong> CAD circle symbols → sprinkler family placement with branch pipe connected to the collector</li>
+      </ul>
+      <div class="card-result">Used on US-based projects. CAD drawing → fully connected Revit MEP model in minutes. <span class="flag">🇺🇸</span></div>
+    </div>
+
+    <!-- MS Teams Bot -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">MS Teams Coordination Bot</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"One button: captures active Revit view and sends a formatted Adaptive Card to Teams with element metadata and RFI tracking."</div>
+      <a class="yt-link-btn" href="https://www.youtube.com/watch?v=Z_0BGCviBUw" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Watch Demo — MS Teams Coordination Bot
+      </a>
+      <ul class="card-bullets">
+        <li>Captures the active Revit view as a JPEG image and embeds it directly in a Teams Adaptive Card with element metadata</li>
+        <li>Posts to a Teams channel webhook; supports reply-to-thread for status updates without creating new cards</li>
+        <li>Tracks RFI status with action buttons — all without leaving Revit</li>
+      </ul>
+      <div class="card-result">Real-time BIM coordination without leaving Revit. Used on US-based industrial projects. <span class="flag">🇺🇸</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Discord Coordination Bot</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Sends element coordination messages to Discord with screenshot — resolves linked model element ownership and embeds it in the message."</div>
+      <ul class="card-bullets">
+        <li>Resolves the selected element's worksharing owner — works across both host and linked model documents</li>
+        <li>Captures the Revit view as PNG and posts it to a Discord webhook with element category, creator, and view name</li>
+      </ul>
+      <div class="card-result">Async issue reporting directly from Revit to Discord — no screenshots, no alt-tabbing, no lost context.</div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ STANDARDS COMPLIANCE ══════════ -->
+  <div class="section-title">Standards Compliance &amp; Data Integration</div>
+  <div class="projects-grid">
+
+    <!-- Level Fixer -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Level Fixer — BIM Standards QC</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Detects elements that violate BIM level assignment rules — reports discrepancies and batch-fixes them across the full model."</div>
+      <a class="yt-link-btn" href="https://www.youtube.com/watch?v=lt5o0z-P6yk" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Watch Demo — Level Fixer BIM QC
+      </a>
+      <ul class="card-bullets">
+        <li>Scans all elements and compares their assigned level to their physical Z coordinate — flags anything outside ±80mm tolerance</li>
+        <li>WPF report window lists discrepancies with element navigation links and a one-click batch fix option</li>
+        <li>Preserves MEP system elevation offsets during level reassignment</li>
+      </ul>
+      <div class="card-result">Encode a standard as rules → scan the model → report violations → automated fix. Same architecture applies to ASTM/AASHTO compliance checks.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">MEP below Ceiling — Clearance Enforcer</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Scans all MEP elements and flags any that violate minimum clearance below ceilings — configurable tolerance per standard."</div>
+      <ul class="card-bullets">
+        <li>User-configurable clearance tolerance displayed in project units (mm or ft)</li>
+        <li>Computes vertical distance between each MEP element and the ceiling bottom face — handles both host model and linked model ceilings</li>
+        <li>Outputs a violation list with direct navigation links to each flagged element</li>
+      </ul>
+      <div class="card-result">Directly encodes a clearance requirement as an automated model scan — violations reported across the whole project in seconds.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Quantity Takeoff Plugin — Schedule Export &amp; BOM</div>
+        <div class="tag tag-py">Python</div>
+      </div>
+      <div class="card-tagline">"Exports any Revit schedule to Excel and generates Material Takeoff schedules with level filtering — the BOM pipeline for fabrication."</div>
+      <ul class="card-bullets">
+        <li>Reads any Revit schedule and exports header and data rows to a formatted Excel file</li>
+        <li>Creates material takeoff schedules with level filtering, sorting, and grouping by material</li>
+        <li>Import side: Excel data drives material creation with parameter type mapping for each property</li>
+      </ul>
+      <div class="card-result">Model → structured fabrication data pipeline. Freelance delivery. <span class="flag">🇫🇷</span><span class="country-tag">France</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">CAD Text → Revit Parameter (Dynamo)</div>
+        <div class="tag tag-dyn">Dynamo</div>
+      </div>
+      <div class="card-tagline">"Reads text annotations from a CAD drawing and writes them directly into Revit element parameters — tested on 85+ elements."</div>
+      <ul class="card-bullets">
+        <li>Extracts text annotation geometry from the CAD import by layer</li>
+        <li>Spatially matches each text label to the nearest Revit element and writes the value into the target parameter</li>
+      </ul>
+      <div class="card-result">CAD-to-BIM data migration — not just geometry but embedded annotation data transferred automatically.</div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ FREELANCE PORTFOLIO ══════════ -->
+  <div class="section-title">Freelance Portfolio — 12 Projects</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Project</th><th>What Was Delivered</th><th>Tech</th><th>Country</th><th>Complexity</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Structural Sections</strong></td><td>PyRevit tool: auto-generates section views for columns with smart dimension placement and tag positioning</td><td>Python / Revit API</td><td>🇸🇦 Saudi Arabia</td><td class="complexity-high">High</td></tr>
+        <tr><td><strong>Socket Auto-Placement</strong></td><td>Room-aware socket placer: 6-point collision check, door swing arcs, furniture clearance. 43 placed / 30 skipped on test model</td><td>Python / Revit API</td><td>🇩🇪 Germany</td><td class="complexity-high">High</td></tr>
+        <tr><td><strong>Material Qty Takeoff</strong></td><td>PyRevit extension: Excel↔Revit material sync, dynamic takeoff schedules with level filtering</td><td>Python / Revit API</td><td>🇫🇷 France</td><td class="complexity-high">High</td></tr>
+        <tr><td><strong>FacadeKit</strong></td><td>Catalog-based panel + gutter auto-placement on exterior wall faces with 2D zone decomposition</td><td>Python / Revit API</td><td>🇳🇱 Netherlands</td><td class="complexity-high">High</td></tr>
+        <tr><td><strong>Acoustic Panels</strong></td><td>Parametric panel families driven by Grasshopper acoustic analysis + IFC export</td><td>Grasshopper / Revit</td><td>🇪🇸 Spain</td><td class="complexity-high">High</td></tr>
+        <tr><td><strong>Solar Study</strong></td><td>Time-based solar radiation + parametric Louver families optimized from shading data</td><td>Dynamo / Revit</td><td>🇸🇦 Saudi Arabia</td><td class="complexity-high">High</td></tr>
+        <tr><td><strong>Facade Patterns</strong></td><td>Parametric facade generation script with panel size/placement rules</td><td>Dynamo</td><td>—</td><td class="complexity-med">Med</td></tr>
+        <tr><td><strong>Topo Heat Map</strong></td><td>Elevation-to-color gradient on topographic solid (8 versions)</td><td>Dynamo</td><td>🇬🇧 UK</td><td class="complexity-med">Med</td></tr>
+        <tr><td><strong>Retaining Wall</strong></td><td>Parametric retaining wall design + geometry generation</td><td>Dynamo</td><td>—</td><td class="complexity-med">Med</td></tr>
+        <tr><td><strong>Window/Glass Ratio</strong></td><td>Facade window-to-surface ratio calculator with CSV export</td><td>Dynamo</td><td>🇫🇷 France</td><td class="complexity-med">Med</td></tr>
+        <tr><td><strong>Foam / Upholstery</strong></td><td>3D organic surface modeling for furniture component</td><td>Rhino</td><td>—</td><td class="complexity-med">Med</td></tr>
+        <tr><td><strong>Wall Framing Model</strong></td><td>Structural test model for framing automation validation</td><td>Revit</td><td>—</td><td class="complexity-low">Low</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════ ALL TOOLS QUICK REF ══════════ -->
+  <div class="section-title">All PyRevit Tools — Quick Reference</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Tool</th><th>Panel</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>FP Pipes</strong></td><td>MEP</td><td>CAD linework → connected pipe network with auto-fittings at every junction</td></tr>
+        <tr><td><strong>FP Sprinklers</strong></td><td>MEP</td><td>CAD circle symbols → sprinkler families with branch pipe connection to collector</td></tr>
+        <tr><td><strong>Cross System Tap</strong></td><td>MEP</td><td>Connects pipes from different MEP systems without merging system assignments</td></tr>
+        <tr><td><strong>Toggle Junction</strong></td><td>MEP</td><td>Switches between tee and tap fitting on a pipe junction</td></tr>
+        <tr><td><strong>Ceiling from Wall</strong></td><td>Architecture</td><td>Boolean solid operations → auto-generates ceiling with edges locked to walls</td></tr>
+        <tr><td><strong>Floor from Wall</strong></td><td>Architecture</td><td>Same Boolean geometry pipeline as ceiling, creates floor elements</td></tr>
+        <tr><td><strong>Wall S2B</strong></td><td>Architecture</td><td>3-point scan-to-BIM wall placer with auto wall type creation and live preview</td></tr>
+        <tr><td><strong>Railing from Wall</strong></td><td>Architecture</td><td>Generates railing elements following wall curves automatically</td></tr>
+        <tr><td><strong>Orthogonal</strong></td><td>Architecture</td><td>Snaps element angles to the nearest 90° multiple</td></tr>
+        <tr><td><strong>Socket Place</strong></td><td>Electrical</td><td>Rule-based socket placement with room type height rules and obstacle detection</td></tr>
+        <tr><td><strong>Str Column Sections</strong></td><td>Structure</td><td>Paired X/Y section views per column with auto dimensions, tags, and spot elevations</td></tr>
+        <tr><td><strong>Wall Framing</strong></td><td>Structure</td><td>Stud and plate generation from walls, handles door and window openings</td></tr>
+        <tr><td><strong>Level Fixer</strong></td><td>QC</td><td>Detects and batch-fixes elements assigned to the wrong level by Z position</td></tr>
+        <tr><td><strong>MEP below Ceiling</strong></td><td>QC</td><td>Scans and reports MEP elements that violate minimum clearance below ceilings</td></tr>
+        <tr><td><strong>Export/Import Data</strong></td><td>Material</td><td>Two-way Excel↔Revit sync for material data and schedule exports</td></tr>
+        <tr><td><strong>Viewer360</strong></td><td>Manage</td><td>360° photo viewer linked directly to Revit elements</td></tr>
+        <tr><td><strong>Teams Action</strong></td><td>Manage</td><td>Sends Revit view screenshot and element data to MS Teams as a coordination card</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>
