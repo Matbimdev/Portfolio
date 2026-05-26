@@ -1,6 +1,6 @@
 # Mateo Lopez — BIM Developer Portfolio
 
-**[🌐 View Live Portfolio →](https://Matbimdev.github.io/portfolio/)**
+> **[🌐 View Live Portfolio →](https://matbimdev.github.io/Portfolio/)**
 
 ---
 
